@@ -1,8 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+)
+
+func init() {
+	flag.Parse()
+}
 
 func main() {
-	p := LoadProblem("/Users/mattomatic/Dropbox/projects/optimization/knapsack/data/ks_19_0")
-	fmt.Println(p)
+	if flag.NArg() != 1 {
+		fmt.Println("usage: ./knapsack <inputFile>")
+	}
+
+    filename := flag.Arg(0)
+	p := LoadProblemFile(filename)
+	solution := solve(p)
+	solution.Print()
 }
