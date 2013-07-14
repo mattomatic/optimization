@@ -14,8 +14,8 @@ func main() {
 		fmt.Println("usage: ./knapsack <inputFile>")
 	}
 
-    filename := flag.Arg(0)
+	filename := flag.Arg(0)
 	p := LoadProblemFile(filename)
-	solution := solve(p)
-	solution.Print()
+	solution := greedySolve(p)
+	fmt.Println(solution.String())
 }

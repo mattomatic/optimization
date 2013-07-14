@@ -6,20 +6,8 @@ import (
 	"os"
 )
 
-type Item struct {
-	Id     int
-	Value  int
-	Weight int
-}
-
-type Problem struct {
-	Size     int
-	Capacity int
-	Items    []Item
-}
-
 func LoadProblemFile(filename string) *Problem {
-    fp, err := os.Open(filename)
+	fp, err := os.Open(filename)
 
 	if err != nil {
 		panic("could not open file")
