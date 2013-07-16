@@ -27,7 +27,7 @@ func (s *itemSorter) Len() int {
 
 // The greedy solver sorts the items by f(x) = x.Value / x.Weight
 // and chooses as many items as will fit into the knapsack. Note
-// that it will not necessarily choose the first N items, as 
+// that it will not necessarily choose the first N items, as
 // some items may not fit even though f(x_i) is higher than f(x_i+1)
 func greedySolve(p *Problem) *Solution {
 	sorter := &itemSorter{p.Items}
