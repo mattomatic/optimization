@@ -20,7 +20,7 @@ type Problem struct {
 type Solution struct {
 	Objective int
 	Optimal   bool
-	Items     map[int]bool
+	Items     ItemSet
 	Problem
 }
 
@@ -36,8 +36,8 @@ func (s *Solution) String() string {
 
 	buffer.WriteString(fmt.Sprintf("%d %d\n", s.Objective, btoi(s.Optimal)))
 
-	for id, _ := range s.Problem.Items {
-		_, ok := s.Items[id]
+	for _, item := range s.Problem.Items {
+		_, ok := s.Items[item]
 
 		if ok {
 			buffer.WriteString("1 ")
@@ -54,8 +54,8 @@ func (s *Solution) String() string {
 func (s *Solution) Print() {
 	fmt.Printf("solution objective(%d) optimal(%t)\n", s.Objective, s.Optimal)
 
-	for id, _ := range s.Items {
-		fmt.Println("\t", s.Problem.Items[id])
+	for item := range s.Items {
+		fmt.Println("\t", item)
 	}
 
 	fmt.Println("---------")

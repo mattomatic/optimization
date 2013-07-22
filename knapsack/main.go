@@ -3,19 +3,29 @@ package main
 import (
 	"flag"
 	"fmt"
+
 )
 
-func init() {
-	flag.Parse()
-}
-
 func main() {
-	if flag.NArg() != 1 {
-		fmt.Println("usage: ./knapsack <inputFile>")
-	}
-
+	solver := flag.String("solver", "dynamic", "specify solver (greedy|dynamic)")
+	flag.Parse()
 	filename := flag.Arg(0)
 	p := LoadProblemFile(filename)
-	solution := greedySolve(p)
+
+	var solution *Solution
+	
+	StartCPUProfile("prof")
+
+	switch *solver {
+	case "greedy":
+		solution = greedySolve(p)
+	case "dynamic":
+		solution = dynamicSolve(p)
+	default:
+		panic("unrecognized solver")
+	}
+	
+	StopCPUProfile()
+
 	fmt.Println(solution.String())
 }
